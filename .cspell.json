@@ -1,0 +1,27 @@
+{
+  "version": "0.2",
+  "ignorePaths": [".git", "bun.lockb"],
+  "dictionaryDefinitions": [],
+  "dictionaries": [
+    "en_US",
+    "companies",
+    "softwareTerms",
+    "misc",
+    "typescript",
+    "npm"
+  ],
+  "words": [
+    "Avenir",
+    "Iconify",
+    "lockb",
+    "njsproj",
+    "ntvs",
+    "xlink",
+    "yutotnh"
+  ],
+  "ignoreWords": [],
+  "import": [],
+  "useGitignore": true,
+  "enableGlobDot": true,
+  "enabled": true
+}
