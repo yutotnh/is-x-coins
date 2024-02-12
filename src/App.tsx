@@ -1,33 +1,66 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { isXCoins } from "./isXCoins";
+
+/**
+ * @type {number[]}
+ * @description Japanese yen coins
+ */
+const coins = [1, 5, 10, 50, 100, 500];
+
+/**
+ * @type {number}
+ * @description Default count of coins
+ */
+const defaultCount = 3;
+
+/**
+ * @type {number}
+ * @description Default price
+ */
+const defaultPrice = 300;
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(defaultCount);
+  const [price, setPrice] = useState(defaultPrice);
 
   return (
     <>
+      <h1>
+        is{count}COINS = {isXCoins(price, count, coins) ? "True" : "False"}
+      </h1>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <label htmlFor="input">
+          Count of coins:&nbsp;
+          <input
+            inputMode="numeric"
+            pattern="\d*"
+            value={count}
+            onChange={(e) => setCount(Number(e.target.value))}
+          />
+        </label>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <div>
+        <label htmlFor="input">
+          Price of check:&nbsp;
+          <input
+            inputMode="numeric"
+            pattern="\d*"
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
+          />
+        </label>
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            setCount(defaultCount);
+            setPrice(defaultPrice);
+          }}
+        >
+          Reset
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
