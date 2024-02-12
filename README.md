@@ -1,30 +1,33 @@
-# React + TypeScript + Vite
+# isXCOINS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Please visit [isXCOINS](https://yutotnh.github.io/is-x-coins/).
 
-Currently, two official plugins are available:
+## How to use
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Open [isXCOINS](https://yutotnh.github.io/is-x-coins/).
 
-## Expanding the ESLint configuration
+2. Input the price and count of coins.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3 Check the result.
 
-- Configure the top-level `parserOptions` property like this:
+## Development
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
+### Install
+
+```bash
+git clone git@github.com:yutotnh/is-x-coins.git
+cd is-x-coins
+bun install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Run
+
+```bash
+bun dev # Please open http://localhost:5173 in your browser.
+```
+
+### Build
+
+```bash
+bun build
+```
