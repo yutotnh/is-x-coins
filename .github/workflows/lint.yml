@@ -1,0 +1,42 @@
+name: "Lint"
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - name: eslint
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: reviewdog/action-eslint@v1
+        with:
+          eslint_flags: ". --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+          filter_mode: nofilter
+          fail_on_error: "true"
+      - name: eslint
+        if: ${{ github.event_name != 'pull_request' }}
+        run: bun lint src
+
+  actionlint:
+    # reviewdog/action-actionlint is only supported on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: reviewdog/action-actionlint@v1
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          reporter: github-pr-review
+          fail_on_error: "true"
+      - run: |
+          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          ./actionlint -color
+        if: ${{ github.event_name != 'pull_request' }}
