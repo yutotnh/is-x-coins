@@ -20,3 +20,9 @@ jobs:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run build
+      - name: Upload artifact
+        if: runner.os == 'Linux' && github.ref == 'refs/heads/deploy'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: ./dist
