@@ -1,0 +1,26 @@
+name: "Spell"
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  spell:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - uses: reviewdog/action-setup@v1
+      - run: bun install --frozen-lockfile
+      - name: Spell check
+        if: ${{ github.event_name == 'pull_request' }}
+        run: bun spellcheck | reviewdog -efm="%f:%l:%c - %m" -reporter=github-pr-review -filter-mode=nofilter -fail-on-error=true
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Spell check
+        if: ${{ github.event_name != 'pull_request' }}
+        run: bun spellcheck
